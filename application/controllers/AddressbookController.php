@@ -1,6 +1,6 @@
 <?php
 
-class AddressController extends Zend_Controller_Action
+class AddressbookController extends Zend_Controller_Action
 {
 
     public function init()
@@ -13,5 +13,13 @@ class AddressController extends Zend_Controller_Action
         // action body
     }
 
+    public function contactAction(){
+    	$table = new Application_Model_AddressbookMapper();
+    	$contacts = $table->fetchAll();
 
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->view->contacts = $contacts;
+        $this->render('index');
+    }
 }
