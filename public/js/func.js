@@ -3,7 +3,6 @@ $(document).ready(function(){
 		var request = $.ajax({
 			url: "addressbook/contact",
 		  	method: "POST",
-		  	//data: { id : menuId },
 		  	dataType: "html",
 		  	beforeSend: function( xhr ) {
 				$("#dinamic-content").fadeOut('fast');
@@ -19,3 +18,25 @@ $(document).ready(function(){
 		});
 	});
 });
+
+function detail(title_modal, id_contacto){
+	$("#myModalLabel").html(title_modal);
+
+	var request = $.ajax({
+		url: "addressbook/detail",
+	  	method: "POST",
+	  	data: { contacto : id_contacto },
+	  	dataType: "html",
+	  	beforeSend: function( xhr ) {
+			$(".modal-body").find(".row").html("");
+		}
+	});
+
+	request.done(function(result) {
+		$(".modal-body").find(".row").append(result);
+	});
+
+	request.fail(function(jqXHR, textStatus) {
+	  	alert("Request failed: " + textStatus);
+	});
+}

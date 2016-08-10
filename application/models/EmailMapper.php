@@ -1,5 +1,5 @@
 <?php
-class Application_Model_AddressbookMapper
+class Application_Model_EmailMapper
 {
     protected $_dbTable;
  
@@ -18,18 +18,18 @@ class Application_Model_AddressbookMapper
     public function getDbTable()
     {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Application_Model_DbTable_Addressbook');
+            $this->setDbTable('Application_Model_DbTable_Email');
         }
         return $this->_dbTable;
     }
  
-    public function save(Application_Model_Addressbook $addressbook)
+    public function save(Application_Model_Addressbook $email)
     {
         $data = array(
-            'nombre' => $addressbook->getNombre()
+            'correo' => $email->getCorreo()
         );
  
-        if (null === ($id = $addressbook->getId())) {
+        if (null === ($id = $email->getId())) {
             unset($data['id']);
             $this->getDbTable()->insert($data);
         } else {
@@ -37,15 +37,29 @@ class Application_Model_AddressbookMapper
         }
     }
  
-    public function find($id, Application_Model_Addressbook $addressbook)
+    public function find($id, Application_Model_Email $email)
     {
         $result = $this->getDbTable()->find($id);
         if (0 == count($result)) {
             return;
         }
         $row = $result->current();
-        $addressbook->setId($row->id_contacto)
-                  ->setNombre($row->nombre);
+        $email->setId($row->id_contacto)
+                  ->setCorreo($row->correo);
+    }
+
+    public function findIdContact($id_contacto)
+    {
+    	$where = array("id_contacto = " . $id_contacto);
+        $resultSet = $this->getDbTable()->fetchAll($where);
+        $entries   = array();
+        foreach ($resultSet as $row) {
+            $entry = new Application_Model_Email();
+            $entry->setId($row->id_contacto)
+                  ->setCorreo($row->correo);
+            $entries[] = $entry;
+        }
+        return $entries;
     }
  
     public function fetchAll()
@@ -53,9 +67,9 @@ class Application_Model_AddressbookMapper
         $resultSet = $this->getDbTable()->fetchAll();
         $entries   = array();
         foreach ($resultSet as $row) {
-            $entry = new Application_Model_Addressbook();
+            $entry = new Application_Model_Email();
             $entry->setId($row->id_contacto)
-                  ->setNombre($row->nombre);
+                  ->setCorreo($row->correo);
             $entries[] = $entry;
         }
         return $entries;
