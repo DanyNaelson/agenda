@@ -6,7 +6,7 @@ $(document).ready(function(){
 		  	//data: { id : menuId },
 		  	dataType: "html",
 		  	beforeSend: function( xhr ) {
-				$("#dinamic-content").fadeOut('slow');
+				$("#dinamic-content").fadeOut('fast');
 			}
 		});
 

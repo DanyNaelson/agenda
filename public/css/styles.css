@@ -1,1 +1,10 @@
 /*estilos del sitio*/
+.icon-contact{
+	border-radius: 50%;
+}
+
+.icon-contact, .text-contact{
+	display: inline-block;
+	margin: 0 auto;
+	vertical-align: middle;
+}

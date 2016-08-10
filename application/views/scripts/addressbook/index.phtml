@@ -1,3 +1,41 @@
-<? foreach ($this->contacts as $contact): ?>
-    <p><?= $contact->getNombre() ?></p>
-<? endforeach; ?>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<th class="text-center">Nombre</th>
+					<th class="text-center">Detalles</th>
+					<th class="text-center">Editar</th>
+					<th class="text-center">Borrar</th>
+				</thead>
+				<tbody>
+				<? foreach ($this->contacts as $contact): ?>
+					<tr id="contacto_<?= $contact->getId() ?>">
+						<td>
+						    <button type="button" class="btn btn-default btn-lg icon-contact">
+				                <?= strtoupper(substr($contact->getNombre(), 0, 1)) ?>
+				            </button>
+			            	<h3 class="text-contact"><?= $contact->getNombre() ?></h3>
+			            </td>
+			            <td>
+						    <button type="button" class="btn btn-info btn-lg detail-contact">
+				                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+				            </button>
+				        </td>
+				        <td>
+							<button type="button" class="btn btn-warning btn-lg edit-contact">
+				                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+				            </button>
+			            </td>
+			            <td>
+							<button type="button" class="btn btn-danger btn-lg delete-contact">
+				                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				            </button>
+			            </td>
+					</tr>
+				<? endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
