@@ -8,9 +8,11 @@ class AddressbookController extends Zend_Controller_Action
         /* Initialize action controller here */
     }
 
-    public function indexAction()
+    public function addAction()
     {
-        // action body
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->render('add-contact');
     }
 
     public function contactAction(){
@@ -42,6 +44,10 @@ class AddressbookController extends Zend_Controller_Action
         $detail_email = $this->create_html_email($correos);
 
 		echo $detail_address . $detail_telephone . $detail_email;
+    }
+
+    public function saveAction(){
+    	
     }
 
     private function create_html_address($direcciones){
