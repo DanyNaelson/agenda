@@ -1,4 +1,12 @@
 /*estilos del sitio*/
+.error-required input{
+	border-color: #d9534f;
+}
+
+.error-message{
+	display: none;
+}
+
 .icon-contact{
 	border-radius: 50%;
 }

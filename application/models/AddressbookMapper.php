@@ -47,6 +47,20 @@ class Application_Model_AddressbookMapper
         $addressbook->setId($row->id_contacto)
                   ->setNombre($row->nombre);
     }
+
+    public function findIdContact($id_contacto)
+    {
+        $where = array("id_contacto = " . $id_contacto);
+        $resultSet = $this->getDbTable()->fetchAll($where);
+        $entries   = array();
+        foreach ($resultSet as $row) {
+            $entry = new Application_Model_Addressbook();
+            $entry->setId($row->id_contacto)
+                  ->setNombre($row->nombre);
+            $entries[] = $entry;
+        }
+        return $entries;
+    }
  
     public function fetchAll()
     {
